@@ -177,7 +177,11 @@ else
 
 	(
 		cd /data
+		## temporary fix for https://bugzilla.redhat.com/show_bug.cgi?id=2265995
+		## remove when upstream is fixed
+		## tested with centos-9-stream centos-8-stream and fedora-30
 		grep '/$' /etc/volume-data-list | sed 's!^!.!' | xargs mkdir -p
+		chown -R pkiuser:pkiuser /data/etc/pki/pki-tomcat
 	)
 
 	HOSTNAME_SHORT=${HOSTNAME%%.*}
